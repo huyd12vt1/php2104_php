@@ -7,19 +7,27 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## How to run project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Run command bellow:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```
+cd nguyen_van_giang/laravel-app/
+composer install
+npm install
+npm run dev
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+And start server
+
+```
+php artisan serve
+```
+
+Now, you can try it http://localhost:8000/home-page
+
+https://user-images.githubusercontent.com/49383891/131205031-7723bd94-7a58-4e6e-9d57-3700b892fd6d.mov
+
 
 ## Learning Laravel
 
