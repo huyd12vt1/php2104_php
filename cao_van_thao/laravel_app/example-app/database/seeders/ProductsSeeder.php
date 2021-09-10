@@ -20,7 +20,7 @@ class ProductsSeeder extends Seeder
 
         $faker = \Faker\Factory::create();
 
-        for ($j = 0; $j < 10; $j++) {
+        for ($j = 0; $j < 100; $j++) {
 
             $data[] = [
                 'name' => $faker->name,
@@ -33,9 +33,12 @@ class ProductsSeeder extends Seeder
                 'status' => rand(1, 3),
                 'rate' => rand(100, 1000),
                 'start_sale_date' => $faker->date($format = 'Y-m-d', $max = 'now'),
-                'image'=>$faker->imageUrl($width = 640, $height = 480),
+                'image'=>$faker->imageUrl($width = 250, $height = 300),
                 'nhan_vien_id'=>rand(1,5),
                 'posting_time'=>$faker->date($format = 'Y-m-d', $max = 'now'),
+                'sale_off'=>rand(0, 30),
+                'price_off'=>rand(300, 500),
+                'is_public'=>rand(0, 1),
             ];
         }
         DB::table('products')->insert($data);
