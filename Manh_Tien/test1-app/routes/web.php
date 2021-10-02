@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SingleController;
-
-
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\AdminProductController ;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,7 +44,7 @@ Route::get('/formget', function (Request $request) {
 Route::post('/formpost', function (Request $request) {
     return view('view', ['data' => $request->all()]);
 });
-//group 
+/*group 
 Route::group(['admin'], function() {
     Route::get('/select', function () {
         return 'select database';
@@ -56,7 +56,7 @@ Route::group(['admin'], function() {
         return 'Delete database';
     });
 });
-
+*/
 
 Route::get('/user/{id}', function (Request $request, $id) {
     return 'User '.$id;
@@ -203,3 +203,24 @@ Route::get('/theme-groceries-page', [ProductController::class, 'groceries'])->na
 Route::get('/theme-gourmet-page', [ProductController::class, 'gourmet'])->name('theme-gourmet-page');
 
 Route::get('/theme-beverages-page', [ProductController::class, 'beverages'])->name('theme-beverages-page');
+
+Route::get('/theme-categories-page/{id}', [CategoryController::class, 'show'])->name('theme-categories-page.show');
+
+Route::get('/theme-categories-page', [CategoryController::class, 'index'])->name('theme-categories-page');
+
+//admin
+Route::name('admin')->prefix('admin')->group(function () {
+    Route::resource('products',AdminProductController::class);
+    Route::get('/search',[AdminProductController::class, 'search'])->name('search');
+    Route::get('/searchs',[AdminProductController::class, 'searchs'])->name('searchs');
+});
+
+/* 
+Route::get('/admin/products', function() {
+    return view('admin/products/product-index');
+})->name('products');
+
+Route::get('/admin/products',[ProductController::class, 'show'])->name('admin-product');
+
+Route::get('/admin/category',[CategoryController::class, 'adminshow'])->name('admin-category');
+*/

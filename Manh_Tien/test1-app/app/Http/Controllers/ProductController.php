@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -15,12 +16,25 @@ class ProductController extends Controller
         return view('my-theme-page.products-page', ['products' => $products]);
     } 
 
+    public function show ()
+    {
+        $products = DB::table('shop_products')
+                    ->get();
+        
+        return view('admin/products/product-index', ['products' => $products]);
+    }
+    
     public function home ()
     {
         $products = DB::table('shop_products')
                     ->paginate(6);
-
-        return view('theme-home-page', ['products' => $products]);
+        $categories = Category::where('is_public', config('category.public'))
+                    ->get();
+                    
+        return view('theme-home-page', [
+            'products' => $products,
+            'categories' => $categories,
+        ]);
     } 
 
     public function household ()

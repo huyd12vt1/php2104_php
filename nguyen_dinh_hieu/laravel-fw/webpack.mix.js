@@ -16,5 +16,4 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     require('tailwindcss'),
     require('autoprefixer'),
 ]);
-
-mix.copyDirectory('resources/time-zone', 'public/time-zone');
+mix.copyDirectory('vendor/almasaeed2010/adminlte', 'public/time-zone/adminlte');

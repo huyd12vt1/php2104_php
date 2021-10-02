@@ -15,9 +15,13 @@ class CreateUpdateProductsToAddTable extends Migration
     {
 
         Schema::table('products', function (Blueprint $table) {
-            $table->string('image');
-            $table->integer('nhan_vien_id');
-            $table->dateTime('posting_time');
+            $table->string('image')->nullable();
+            $table->integer('nhan_vien_id')->nullable();
+            $table->dateTime('posting_time')->nullable();
+            $table->integer('sale_off')->nullable();
+            $table->float('price_off')->nullable();
+            $table->integer('is_public')->nullable();
+            $table->bigInteger('categories_id')->references('id')->on('categories');
         });
     }
 

@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 use Illuminate\Support\Facades\View;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +48,7 @@ Route::get('/username/{name?}', function (Request $request, $name = 'Guest') {
 //Route Group
 
 //Middleware
-Route::middleware(['admin'])->group(function () {
+/* Route::middleware(['admin'])->group(function () {
     
     Route::get('/products', function () {
         return view('dashbroad');
@@ -54,24 +57,21 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/users', function () {
         return view('users');
     })->name('users');
-});
+}); */
 
 //Prefix
-Route::prefix('admin.')->group(function () {
+Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
-    Route::get('/users', function () {
-        return view('users');
-        //Url like: http://127.0.0.1:8000/admin/users , admin is a prefix in front of users
-    })->name('users');
+    Route::resource('products', AdminProductController::class);
 });
 
 Route::get('/shopper_fashion/home', function() {
     return view('home-page');
-}); 
+})->name('shopper.home'); 
 
-Route::get('/shopper_fashion/shop', function() {
-    return view('shopper-shop');
-});
+Route::get('/shopper_fashion/shop/', [ShopController::class, 'shopIndex'])->name('shop.index');
+
+Route::get('/shopper_fashion/product/{id}', [ProductController::class, 'productInfo'])->name('product.info');
 
 Route::get('/shopper_fashion/shop-single', function () {
     return view('shopper-shop-single');
